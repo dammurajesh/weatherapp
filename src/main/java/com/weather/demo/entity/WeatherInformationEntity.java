@@ -1,5 +1,6 @@
 package com.weather.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper=false)
-@Slf4j
 @Table(name="Weather_Information")
 public class WeatherInformationEntity implements Serializable {
 
@@ -21,9 +21,35 @@ public class WeatherInformationEntity implements Serializable {
     @Column(name = "Location_ID")
     private Integer locationID;
 
+    public Integer getLocationID() {
+        return locationID;
+    }
+
+    public void setLocationID(Integer locationID) {
+        this.locationID = locationID;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
     @Column(name = "Lat")
-    private double lat;
+   @JsonProperty("lat")
+    private Double lat;
 
     @Column(name = "Lng")
-    private double lng;
+    @JsonProperty("lng")
+    private Double lng;
 }

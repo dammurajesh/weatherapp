@@ -20,8 +20,29 @@ public class Weather  {
     private String locationID;
     @ApiModelProperty(notes = "Type of the account to be created", position = 2, example = "100")
     @NotNull
-    private String lat;
+    private Double lat;
     @ApiModelProperty(notes = "Type of the account to be created", position = 3, example = "100")
     @NotNull
-    private String lng;
+    private Double lng;
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    @Override
+    public String toString() {
+        return "Car [make=" + lat + ", manufacturer=" + lng + ", id=" + locationID + "]";
+    }
 }
