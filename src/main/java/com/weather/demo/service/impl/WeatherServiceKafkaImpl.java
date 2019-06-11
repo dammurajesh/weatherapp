@@ -58,7 +58,6 @@ public class WeatherServiceKafkaImpl implements WeatherService {
     public void saveWeatherInformation(Weather weather) {
 
         WeatherAvro avrotest = WeatherAvro.newBuilder()
-                .setLocationId("123")
                 .setLat(weather.getLat())
                 .setLng(weather.getLng())
                 .setTemperature(weather.getTemperature())
