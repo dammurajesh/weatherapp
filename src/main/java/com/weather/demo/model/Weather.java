@@ -15,15 +15,15 @@ import javax.validation.constraints.NotNull;
 @JsonIgnoreProperties
 @EqualsAndHashCode
 public class Weather  {
-    @ApiModelProperty(notes = "Type of the account to be created", position = 1, example = "1")
-    @NotNull
-    private String locationID;
-    @ApiModelProperty(notes = "Type of the account to be created", position = 2, example = "100")
+    @ApiModelProperty(notes = "Type of the account to be created", position = 1, example = "100.10")
     @NotNull
     private Double lat;
-    @ApiModelProperty(notes = "Type of the account to be created", position = 3, example = "100")
+    @ApiModelProperty(notes = "Type of the account to be created", position = 2, example = "100.10")
     @NotNull
     private Double lng;
+    @ApiModelProperty(notes = "Type of the account to be created", position = 3, example = "90.5")
+    @NotNull
+    private Double temperature;
 
     public Double getLat() {
         return lat;
@@ -41,8 +41,11 @@ public class Weather  {
         this.lng = lng;
     }
 
-    @Override
-    public String toString() {
-        return "Car [make=" + lat + ", manufacturer=" + lng + ", id=" + locationID + "]";
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
     }
 }

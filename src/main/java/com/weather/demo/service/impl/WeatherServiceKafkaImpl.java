@@ -57,39 +57,13 @@ public class WeatherServiceKafkaImpl implements WeatherService {
     @Override
     public void saveWeatherInformation(Weather weather) {
 
-//        Properties props = new Properties();
-//        props.put("bootstrap.servers", "localhost:29092");
-//        props.put("acks", "all");
-//        props.put("retries", 0);
-//        props.put("batch.size", 16384);
-//        props.put("linger.ms", 1);
-//        props.put("buffer.memory", 33554432);
-//        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-//        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-//
-//        Producer<String, String> producer = new KafkaProducer<>(props);
-//        for (int i = 0; i < 100; i++)
-//            producer.send(new ProducerRecord<String, String>("my-topic", Integer.toString(i), Integer.toString(i)));
-//
-//        producer.close();
-
-
         WeatherAvro avrotest = WeatherAvro.newBuilder()
                 .setLocationId("123")
-                .setLat("23.0")
-                .setLng("345")
+                .setLat(weather.getLat())
+                .setLng(weather.getLng())
+                .setTemperature(weather.getTemperature())
                 .build();
-       // kafkaTemplate.send(TOPIC, avrotest);
 
-//        final Properties props = new Properties();
-//        props.setProperty("bootstrap.servers", "0.0.0.0:9092");
-//        //props.setProperty("bootstrap.servers", "broker:9092");
-//        props.setProperty("acks", "all");
-//        props.setProperty("retries", "10");
-//// Avro properties
-//        props.setProperty("key.serializer", StringSerializer.class.getName());
-//        props.setProperty("value.serializer", KafkaAvroSerializer.class.getName());
-//        props.setProperty("schema.registry.url", "http://0.0.0.0:8081");
 
         final Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092");
@@ -100,7 +74,7 @@ public class WeatherServiceKafkaImpl implements WeatherService {
         props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
 
         KafkaProducer<String, WeatherAvro> kafkaProducer = new KafkaProducer<String, WeatherAvro>(props);
-        ProducerRecord<String, WeatherAvro> producerRecord = new ProducerRecord<String, WeatherAvro>("weather", avrotest);
+        ProducerRecord<String, WeatherAvro> producerRecord = new ProducerRecord<String, WeatherAvro>("weather-1", avrotest);
 
         kafkaProducer.send(producerRecord, new Callback() {
             @Override
